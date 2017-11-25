@@ -22,13 +22,13 @@ var creepSpawner = {
         // CLAIM	600
 
 
-        var minimumHarvesters = 3;
-        var minimumUpgraders = 5;
+        var minimumHarvesters = 4;
+        var minimumUpgraders = 6;
         var minimumRepairer = 2;
         var minimumBuilders = 2;
 
         if (harvestCount < minimumHarvesters) { //TODO: CHANGE AWAY FROM BUILDERS + HARVESTERS
-            creepSpawner.spawnCreep(undefined,'harvester',[WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]);
+            creepSpawner.spawnCreep(undefined,'harvester',[WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]);
 
         } else if (upgraderCount < minimumUpgraders) {
             creepSpawner.spawnCreep(undefined,'upgrader',[WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]);
@@ -38,7 +38,7 @@ var creepSpawner = {
             creepSpawner.spawnCreep(undefined,'repairer',[WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]);
 
         } else if (builderCount < minimumBuilders) {
-            creepSpawner.spawnCreep(undefined,'builder',[WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]);
+            creepSpawner.spawnCreep(undefined,'builder',[WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE]);
 
 
         //Something has gone wrong - backup just spawn using max 300 energy.

@@ -15,7 +15,8 @@ var roleUpgrader = {
         if (creep.memory.travel == 'collect') {
             if (creep.carry.energy < creep.carryCapacity) {
                 var sources = creep.room.find(FIND_SOURCES);
-                if (creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+
+                if (creep.harvest(sources[0]) == ERR_NOT_IN_RANGE || sources[0] == ERR_NOT_ENOUGH_RESOURCES) {
                     creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ff8888'}});
                 }
             }else{

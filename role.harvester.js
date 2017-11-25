@@ -8,20 +8,33 @@ module.exports = {
         //DEBUG INFO:
         // console.log("travel: " + creep.memory.target + " | Energy: " + creep.carry.energy + " |");
 
-        if(creep.carry.energy < creep.carryCapacity) {
-            var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[1], {visualizePathStyle: {stroke: '#ffaa00'}});
-            }
+        //ERROR protection
+        if(creep.memory.action == undefined) {
+            creep.memory.action = 'mineing';
         }
-        else {
 
+        //If overrideing use all energy before switching back
+        if(creep.memory.jobOverride == 'builder'){
+            if(creep.carry.energy == 0){
+                creep.memory.jobOverride = 'false';
+                creep.memory.action = 'mineing';
+            }
+            roleBuilder.run(creep);
+            return;
+        }
+
+        //Our action should no longer be transfering
+        if(creep.carry.energy == 0){
+            creep.memory.action = 'mineing';
+        }
+
+        //Go USE energy till empty
+        if(creep.memory.action == 'transfering'){
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) && structure.energy < structure.energyCapacity;
                 }
             });
-
 
             if(targets.length > 0) {
                 if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
@@ -30,8 +43,28 @@ module.exports = {
             }
             else{
                 //Nothing to dump collection at - act as a builder till there is work to do
+                creep.memory.jobOverride = 'builder';
+                creep.memory.building = true;//go build straight away
                 roleBuilder.run(creep);
             }
         }
+
+
+
+        //No Energy left so will go get some
+        if(creep.carry.energy < creep.carryCapacity || creep.memory.action == 'mineing') {
+            var sources = creep.room.find(FIND_SOURCES);
+            if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[1], {visualizePathStyle: {stroke: '#ffaa00'}});
+            }
+        }else{
+            creep.memory.action = 'transfering';
+        }
+
+
+
+
+
+
 	}
 };
