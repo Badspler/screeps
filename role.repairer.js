@@ -19,6 +19,24 @@ module.exports = {
         if(creep.memory.repairing) {
 
 
+            //Actually we are going to feed energy to the tower if its not full.
+
+            var targets = creep.room.find(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return (structure.structureType == STRUCTURE_TOWER && structure.energy < structure.energyCapacity);
+                }
+            });
+
+            if(targets.length > 0) {
+                if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ff22bb'}});
+                }
+            }
+
+
+
+
+
             //TODO: Investigate this:
             // //Check current repair and get it back to full - or just use the rest of our energy
             // var currentRepair = creep.memory.currentRepair;

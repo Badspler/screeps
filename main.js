@@ -3,16 +3,26 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
 var creepSpawner = require('creep.spawner');
+var towerManager = require('tower.manager');
 
 module.exports.loop = function () {
 
     //Clear Memory
-
     for (var i in Memory.creeps) {
         if (!Game.creeps[i]) {
             delete Memory.creeps[i];
         }
     }
+
+
+    //MAKE ALL TOWERS IN ALL ROOMS RUN
+    for(var roomName in Game.rooms) {
+        var towers = Game.rooms[roomName].find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}});
+        towerManager.run(towers,roomName);
+    }
+
+
+
 
     //Counts of creep type
     var harvestCount = 0;

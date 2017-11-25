@@ -1,0 +1,35 @@
+/*
+ * Module code goes here. Use 'module.exports' to export things:
+ * module.exports.thing = 'a thing';
+ *
+ * You can import it from another modules like this:
+ * var mod = require('tower.manager');
+ * mod.thing == 'a thing'; // true
+ */
+
+module.exports = {
+
+    run: function(tower,roomName) {
+        defendRoom(tower,roomName);
+
+
+        /**
+         * Shoot Enemies that come into room.
+         * @param tower
+         * @param roomName
+         */
+        function defendRoom(tower,roomName) {
+            var hostiles = Game.rooms[roomName].find(FIND_HOSTILE_CREEPS);
+            if(hostiles.length > 0) {
+                var username = hostiles[0].owner.username;
+                console.log("TOWER ATTACKING THREAT");
+                Game.notify(`User ${username} spotted in room ${roomName}`);
+
+                tower.forEach(tower => tower.attack(hostiles[0]));
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+};
