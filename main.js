@@ -38,7 +38,7 @@ module.exports.loop = function () {
             builderCount++;
         }
         else if(creep.memory.role == 'repairer') {
-            roleBuilder.run(creep);
+            roleRepairer.run(creep);
             repairerCount++;
         }
         else{

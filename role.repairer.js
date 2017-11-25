@@ -6,16 +6,13 @@ module.exports = {
         //ERROR protection
         if(creep.memory.repairing == undefined) {
             creep.memory.repairing = false;
-            creep.say('Harvest');
         }
 
         if(creep.memory.repairing && creep.carry.energy == 0) {
             creep.memory.repairing = false;
-            creep.say('Harvest');
         }
         if(!creep.memory.repairing && creep.carry.energy == creep.carryCapacity) {
             creep.memory.repairing = true;
-            creep.say('Build');
         }
 
 
@@ -28,8 +25,9 @@ module.exports = {
                 // the second argument for findClosestByPath is an object which takes
                 // a property called filter which can be a function
                 // we use the arrow operator to define it
-            filter: (s) => s.hits < s.hitsMax && s.structureType != STRUCTURE_WALL}); //TODO repair high value targets first s.hitMax - 300 ?
+            filter: (s) => s.hits < s.hitsMax - 300 && s.structureType != STRUCTURE_WALL}); 
             // if we find one
+
             if (structure != undefined) {
                 // try to repair it, if it is out of range
                 if (creep.repair(structure) == ERR_NOT_IN_RANGE) {

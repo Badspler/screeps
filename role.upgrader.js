@@ -9,7 +9,6 @@ var roleUpgrader = {
         //Start as collecting
         if (creep.memory.travel == undefined) {//maybe undefined?
             creep.memory.travel = 'collect';
-            creep.say('Harvest');
         }
 
         //While collecting go collect a full load to deliver
@@ -21,7 +20,6 @@ var roleUpgrader = {
                 }
             }else{
                 creep.memory.travel = 'deliver';
-                creep.say('Upgrade');
             }
 
 
@@ -34,7 +32,6 @@ var roleUpgrader = {
             //Go back to collecting once have delivered all energy
             if (creep.carry.energy == 0){
                 creep.memory.travel = 'collect';
-                creep.say('Harvest');
             }
         }
 	}
