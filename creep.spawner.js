@@ -7,18 +7,46 @@
  * mod.thing == 'a thing'; // true
  */
 var creepSpawner = {
+    run: function (harvestCount, upgraderCount, repairerCount, builderCount) {
 
-    run: function (harvestCount, upgraderCount, builderCount) {
+        var totalAliveCreeps = harvestCount + upgraderCount + repairerCount + builderCount;
 
-        if (harvestCount < 3) { //TODO: CHANGE AWAY FROM BUILDERS + HARVESTERS
-            creepSpawner.spawnCreep(undefined,'harvester',[WORK,WORK,CARRY,MOVE]);
+        //TODO Build function to dynamicly build better creeps using max energy available.
+        // MOVE	    50
+        // WORK	    100
+        // CARRY	50
+        // ATTACK	80
+// RANGED_ATTACK	150
+        // HEAL	    250
+        // TOUGH	10
+        // CLAIM	600
 
-        } else if (upgraderCount < 8) {
-            creepSpawner.spawnCreep(undefined,'upgrader',[WORK,WORK,CARRY,MOVE]);
 
-        } else if (builderCount < 1) {
-            creepSpawner.spawnCreep(undefined,'builder',[WORK,WORK,CARRY,MOVE]);
+        var minimumHarvesters = 3;
+        var minimumUpgraders = 8;
+        var minimumRepairer = 2;
+        var minimumBuilders = 1;
+
+        if (harvestCount < minimumHarvesters) { //TODO: CHANGE AWAY FROM BUILDERS + HARVESTERS
+            creepSpawner.spawnCreep(undefined,'harvester',[WORK, WORK, CARRY, MOVE, MOVE, MOVE]);
+
+        } else if (upgraderCount < minimumUpgraders) {
+            creepSpawner.spawnCreep(undefined,'upgrader',[WORK, WORK, CARRY, MOVE, MOVE, MOVE]);
+
+            //TODO: Add this back in when ready
+        } else if (repairerCount < minimumRepairer) {
+            creepSpawner.spawnCreep(undefined,'builder',[WORK, WORK, CARRY, MOVE, MOVE, MOVE]);
+
+        } else if (builderCount < minimumBuilders) {
+            creepSpawner.spawnCreep(undefined,'builder',[WORK, WORK, CARRY, MOVE, MOVE, MOVE]);
+
+
+        //Something has gone wrong - backup just spawn using max 300 energy.
+        } else if (totalAliveCreeps < 5){
+            console.log("ERROR: Creep Count Low spawning backup harbester.")
+            creepSpawner.spawnCreep(undefined,'harvester',[WORK, WORK, CARRY, MOVE]);
         }
+
     },
 
     spawnCreep: function (name, type, bodyparts) {

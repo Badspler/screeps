@@ -1,12 +1,12 @@
-var roleHarvester = {
+var roleBuilder = require('role.builder');
+
+module.exports = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
 
         //DEBUG INFO:
         // console.log("travel: " + creep.memory.target + " | Energy: " + creep.carry.energy + " |");
-
-
 
         if(creep.carry.energy < creep.carryCapacity) {
             var sources = creep.room.find(FIND_SOURCES);
@@ -15,18 +15,23 @@ var roleHarvester = {
             }
         }
         else {
+
             var targets = creep.room.find(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) && structure.energy < structure.energyCapacity;
-                    }
+                filter: (structure) => {
+                    return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) && structure.energy < structure.energyCapacity;
+                }
             });
+
+
             if(targets.length > 0) {
                 if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
+            else{
+                //Nothing to dump collection at - act as a builder till there is work to do
+                roleBuilder.run(creep);
+            }
         }
 	}
 };
-
-module.exports = roleHarvester;

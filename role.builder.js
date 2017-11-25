@@ -2,7 +2,6 @@ var roleUpgrader = require('role.upgrader');
 
 
 module.exports = {
-//var roleBuilder = {
 
 /** @param {Creep} creep **/
     run: function(creep) {
@@ -12,7 +11,7 @@ module.exports = {
 			// creep.memory.type = 'harvester';
         // }
 
-		//ERROR if switched
+		//ERROR protection
         if(creep.memory.building == undefined) {
             creep.memory.building = false;
             creep.say('Harvest');
@@ -33,11 +32,16 @@ module.exports = {
 	    	var constructionSite = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
 	    	if(constructionSite != undefined){
 	    		if(creep.build(constructionSite) == ERR_NOT_IN_RANGE){
-	    			moveTo(constructionSite, {visualizePathStyle: {stroke: '#ffaa00'}});
+	    			creep.moveTo(constructionSite, {visualizePathStyle: {stroke: '#ffaa00'}});
 				}
 			}
 			else {
-	    		roleUpgrader.run(creep);
+	    	    if(creep.memory.role != 'harvester'){
+                    roleUpgrader.run(creep);
+                }else{
+	    	        //TODO: Harvester has nothing to harbest or build
+                    //Repair?
+                }
 			}
 
 	    }
