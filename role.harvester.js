@@ -7,6 +7,7 @@ var roleHarvester = {
         // console.log("travel: " + creep.memory.target + " | Energy: " + creep.carry.energy + " |");
 
 
+
         if(creep.carry.energy < creep.carryCapacity) {
             var sources = creep.room.find(FIND_SOURCES);
             if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {

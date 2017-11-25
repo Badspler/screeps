@@ -10,12 +10,13 @@ var creepSpawner = {
 
     run: function (harvestCount, upgraderCount, builderCount) {
 
-        if (harvestCount < 4) {
-            //spawn harvester
-            creepSpawner.spawnCreep(undefined,'harvester',[WORK,CARRY,MOVE,MOVE]);
-        } else if (upgraderCount < 4) {
+        if (harvestCount < 3) { //TODO: CHANGE AWAY FROM BUILDERS + HARVESTERS
+            creepSpawner.spawnCreep(undefined,'harvester',[WORK,WORK,CARRY,MOVE]);
+
+        } else if (upgraderCount < 8) {
             creepSpawner.spawnCreep(undefined,'upgrader',[WORK,WORK,CARRY,MOVE]);
-        } else if (builderCount < 2) {
+
+        } else if (builderCount < 1) {
             creepSpawner.spawnCreep(undefined,'builder',[WORK,WORK,CARRY,MOVE]);
         }
     },

@@ -39,12 +39,9 @@ module.exports.loop = function () {
 
 
     //Number of creep types to manage spawning
-    console.log("Harvesters: " + harvestCount + " Upgraders: " + upgraderCount + " Builders: " + builderCount );
+    // console.log("Harvesters: " + harvestCount + " Upgraders: " + upgraderCount + " Builders: " + builderCount );
 
-    // creepSpawner.run(harvestCount,upgraderCount,builderCount);
-
-
-
+    creepSpawner.run(harvestCount,upgraderCount,builderCount);
 
 
 }
