@@ -59,9 +59,9 @@ module.exports = {
                     //     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                     // }
 
-                    // creep.memory.jobOverride = 'builder';
-                    // creep.memory.building = true;//go build straight away
-                    // roleBuilder.run(creep);
+                    creep.memory.jobOverride = 'builder';
+                    creep.memory.building = true;//go build straight away
+                    roleBuilder.run(creep);
                 }
             }
         }

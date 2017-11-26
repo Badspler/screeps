@@ -7,9 +7,9 @@
  * mod.thing == 'a thing'; // true
  */
 var creepSpawner = {
-    run: function (harvestCount, upgraderCount, repairerCount, builderCount, minimumCount) {
+    run: function (harvestCount, upgraderCount, repairerCount, builderCount, claimerCount,scoutCount) {
 
-        var totalAliveCreeps = harvestCount + upgraderCount + repairerCount + builderCount;
+        var totalAliveCreeps = harvestCount + upgraderCount + repairerCount + builderCount;// + claimerCount +  scoutCount; //THESE TYPE NOTE COUNTED
 
         //TODO Build function to dynamicly build better creeps using max energy available.
         // MOVE	    50
@@ -27,7 +27,8 @@ var creepSpawner = {
         var minimumUpgraders = 6;
         var minimumRepairer = 1;
         var minimumBuilders = 2;
-        var minimumClaimer = 1;
+        var minimumClaimer = 0;
+        var minimumCount = 5;
 
         if (harvestCount < minimumHarvesters) { //TODO: CHANGE AWAY FROM BUILDERS + HARVESTERS
             creepSpawner.spawnCreep(undefined,'harvester',[WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]);
@@ -50,6 +51,12 @@ var creepSpawner = {
         } else if (totalAliveCreeps < miniumTotalCreeps){
             console.log("ERROR: Creep Count Low spawning backup harbester.")
             creepSpawner.spawnCreep(undefined,'harvester',[WORK, WORK, CARRY, MOVE]);
+        } else {
+            //excess energy to spend - on scouts
+            // creepSpawner.spawnCreep(undefined,'scout',[MOVE,MOVE,ATTACK,MOVE,ATTACK,MOVE,ATTACK]);
+
+
+            // creepSpawner.spawnCreep(undefined,'scout',[MOVE]);//TODO: Energy runner - one shot tower energy waste
         }
 
     },
