@@ -25,7 +25,7 @@ var creepSpawner = {
         var minimumHarvesters = 4;
         var minimumUpgraders = 6;
         var minimumRepairer = 2;
-        var minimumBuilders = 2;
+        var minimumBuilders = 3;
 
         if (harvestCount < minimumHarvesters) { //TODO: CHANGE AWAY FROM BUILDERS + HARVESTERS
             creepSpawner.spawnCreep(undefined,'harvester',[WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]);

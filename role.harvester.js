@@ -11,6 +11,7 @@ module.exports = {
         //ERROR protection
         if(creep.memory.action == undefined) {
             creep.memory.action = 'mineing';
+            creep.memory.jobOverride = 'false';
         }
 
         //If overrideing use all energy before switching back
@@ -24,7 +25,7 @@ module.exports = {
         }
 
         //Our action should no longer be transfering
-        if(creep.carry.energy == 0){
+        if(creep.carry.energy < 50){
             creep.memory.action = 'mineing';
         }
 
@@ -42,10 +43,10 @@ module.exports = {
                 }
             }
             else{
-                //Nothing to dump collection at - act as a builder till there is work to do
-                creep.memory.jobOverride = 'builder';
-                creep.memory.building = true;//go build straight away
-                roleBuilder.run(creep);
+                //TODO: Nothing to dump collection at - act as a builder till there is work to do
+                // creep.memory.jobOverride = 'builder';
+                // creep.memory.building = true;//go build straight away
+                // roleBuilder.run(creep);
             }
         }
 
@@ -62,5 +63,5 @@ module.exports = {
         }
 
 
-	}
+    }
 };

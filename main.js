@@ -66,6 +66,15 @@ module.exports.loop = function () {
     creepSpawner.run(harvestCount,upgraderCount,repairerCount,builderCount);
 
 
+
+
+    // //Error handeling - needs its only initalisation class
+    // if(Memory.wallStrength == undefined){
+    //     Memory.wallStrength = 5000;
+    // }
+
+
+
 }
 
 
