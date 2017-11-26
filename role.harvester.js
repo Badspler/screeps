@@ -38,31 +38,34 @@ module.exports = {
                 }
             });
 
-            //Store energy in nearest container
+            //Store energy in nearest container that is not full
             var containerTargets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_CONTAINER);
+                    return (structure.structureType == STRUCTURE_CONTAINER );//&& structure.energyCapacity < structure.storeCapacity
                 }
             });
 
+
             if(targets.length > 0 || containerTargets.length > 0) {
-                if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {//TODO: This will dosn't check when its full - had problems coding that
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
                 else if(creep.transfer(containerTargets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE){
                     creep.moveTo(containerTargets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
-                else
-                {
-                    //TODO: Nothing to dump collection at - act as a builder till there is work to do
-                    // if(targets.store(creep.memory.energy)) {
-                    //     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
-                    // }
 
-                    creep.memory.jobOverride = 'builder';
-                    creep.memory.building = true;//go build straight away
-                    roleBuilder.run(creep);
-                }
+            }
+            //NO targets what so ever
+            else
+            {
+                //TODO: Nothing to dump collection at - act as a builder till there is work to do
+                // if(targets.store(creep.memory.energy)) {
+                //     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                // }
+
+                // creep.memory.jobOverride = 'builder';
+                // creep.memory.building = true;//go build straight away
+                // roleBuilder.run(creep);
             }
         }
 
