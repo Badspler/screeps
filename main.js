@@ -4,6 +4,7 @@ var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
 var creepSpawner = require('creep.spawner');
 var towerManager = require('tower.manager');
+var roleClaimer = require('role.claimer');
 
 module.exports.loop = function () {
 
@@ -29,6 +30,8 @@ module.exports.loop = function () {
     var upgraderCount = 0;
     var builderCount = 0;
     var repairerCount = 0;
+    var claimerCount= 0;
+
 
 
     //Loop for jobs
@@ -51,6 +54,10 @@ module.exports.loop = function () {
             roleRepairer.run(creep);
             repairerCount++;
         }
+        else if (creep.memory.role == 'claimer') {
+            roleClaimer.run(creep);
+            claimerCount++;
+        }
         else {
             console.log("Creep has no correct job assigned: " + creep.name);
         }
@@ -58,12 +65,12 @@ module.exports.loop = function () {
 
 
     //Number of creep types to manage spawning
-    var logString = "Harvesters: " + harvestCount + " Upgraders: " + upgraderCount + " Repairer: " + repairerCount + " Builders: " + builderCount;
+    var logString = "Harvesters: " + harvestCount + " Upgraders: " + upgraderCount + " Repairer: " + repairerCount + " Builders: " + builderCount + " Claimers: " + claimerCount;
     if (Memory.logString == undefined || Memory.logString.toString().localeCompare(logString.toString())) {
         Memory.logString = logString.toString();
         console.log(logString);
     }
-    creepSpawner.run(harvestCount,upgraderCount,repairerCount,builderCount);
+    creepSpawner.run(harvestCount,upgraderCount,repairerCount,builderCount,claimerCount);
 
 
 

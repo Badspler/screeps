@@ -50,7 +50,7 @@ module.exports = {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
                 else if(creep.transfer(containerTargets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE){
-                        creep.moveTo(containerTargets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                    creep.moveTo(containerTargets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
                 else
                 {
