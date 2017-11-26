@@ -60,7 +60,7 @@ module.exports = {
                     //Hack way of increasing wall strength once all walls = wallStrength
                     Memory.wallStrength = Memory.wallStrength + 5000;
                 }else {
-                    
+
                     //ELSE Just take the upgrade role
                     if (creep.memory.role != 'harvester') {
                         roleUpgrader.run(creep);
