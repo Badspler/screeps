@@ -9,6 +9,12 @@ var roleScout = require('role.scout');
 
 module.exports.loop = function () {
 
+    //TODO: Game Loop needs to be robust incase something errors - can't freeze up if one bug occours
+
+    //TODO: Needs to be CPU efficient - call out to modules occasionally to save CPU
+        //TODO: EG: Only run spawn checking every 20 ticks.
+
+
     //Clear Memory
     for (var i in Memory.creeps) {
         if (!Game.creeps[i]) {
@@ -17,6 +23,7 @@ module.exports.loop = function () {
     }
 
 
+    //TODO: This was getting called when a creep was an enemies room cant figure out why yet
     //MAKE ALL TOWERS IN ALL ROOMS RUN
     for(var roomName in Game.rooms) {
         var towers = Game.rooms[roomName].find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}});

@@ -9,6 +9,7 @@
 var creepSpawner = {
     run: function (harvestCount, upgraderCount, repairerCount, builderCount, claimerCount,scoutCount) {
 
+
         var totalAliveCreeps = harvestCount + upgraderCount + repairerCount + builderCount;// + claimerCount +  scoutCount; //THESE TYPE NOTE COUNTED
 
         //TODO Build function to dynamicly build better creeps using max energy available.

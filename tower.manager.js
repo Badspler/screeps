@@ -10,6 +10,7 @@
 module.exports = {
 
     run: function(tower,roomName) {
+
         defendRoom(tower,roomName);
 
 
@@ -22,7 +23,7 @@ module.exports = {
             var hostiles = Game.rooms[roomName].find(FIND_HOSTILE_CREEPS);
             if(hostiles.length > 0) {
                 var username = hostiles[0].owner.username;
-                console.log("TOWER ATTACKING THREAT");
+                console.log("TOWER ATTACKING THREAT in " + tower.room + " FROM USER: " + username);
                 Game.notify(`User ${username} spotted in room ${roomName}`);
 
                 tower.forEach(tower => tower.attack(hostiles[0]));
