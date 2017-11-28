@@ -1,4 +1,5 @@
 var roleBuilder = require('role.builder');
+var roleUpgrader = require('role.upgrader');
 
 module.exports = {
 
@@ -15,7 +16,7 @@ module.exports = {
         }
 
         //If overrideing use all energy before switching back
-        if(creep.memory.jobOverride == 'builder'){
+        if(creep.memory.jobOverride == 'builder' || creep.memory.jobOverride == 'upgrader'){
             if(creep.carry.energy == 0){
                 creep.memory.jobOverride = 'false';
                 creep.memory.action = 'mineing';
@@ -63,9 +64,14 @@ module.exports = {
                 //     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 // }
 
-                creep.memory.jobOverride = 'builder';
-                creep.memory.building = true;//go build straight away
-                roleBuilder.run(creep);
+                // creep.memory.jobOverride = 'builder';
+                // creep.memory.building = true;//go build straight away
+                // roleBuilder.run(creep);
+
+
+                creep.memory.jobOverride = 'upgrader';
+                roleUpgrader.run(creep);
+                creep.memory.travel = 'deliver';
             }
         }
 

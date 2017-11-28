@@ -27,15 +27,15 @@ module.exports = {
         //TODO: Manually used for walls currently - all of this needs a proper priority loop / needs pathing to find 'good' dynamic targets
         //TODO: Needs group logic so that each attacker can pick a different target to prevent swaming to one thing (numbers 3<)
 
-        // if(walls != undefined){
-        //     if (!(currentRoomString.localeCompare(baseRoom.toString()) == 0)) {
-        //         if (creep.attack(walls) == ERR_NOT_IN_RANGE) {
-        //             creep.moveTo(walls, {visualizePathStyle: {stroke: '#ff1a26'}});
-        //             return;
-        //         }
-        //     }
-        // }
-        // else
+        if(walls != undefined){
+            if (!(currentRoomString.localeCompare(baseRoom.toString()) == 0)) {
+                if (creep.attack(walls) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(walls, {visualizePathStyle: {stroke: '#ff1a26'}});
+                    return;
+                }
+            }
+        }
+        else
         if (hosttileSpawn.length > 0) {
             creep.moveTo(hosttileSpawn[0],{visualizePathStyle: {stroke: '#ff1a26'}});
             creep.attack(hosttileSpawn[0]);

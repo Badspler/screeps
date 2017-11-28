@@ -4,6 +4,7 @@ var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
 var creepSpawner = require('creep.spawner');
 var towerManager = require('tower.manager');
+var roomPlanner = require('room.planner');
 var roleClaimer = require('role.claimer');
 var roleScout = require('role.scout');
 
@@ -11,11 +12,20 @@ module.exports.loop = function () {
 
     //TODO: Game Loop needs to be robust incase something errors - can't freeze up if one bug occours
 
+
+
     //TODO: Needs to be CPU efficient - call out to modules occasionally to save CPU
         //TODO: EG: Only run spawn checking every 20 ticks.
+    var tickCount = Memory.tickCount;
+    Memory.tickCount = tickCount + 1;
+    // console.log(tickCount);
+    if(tickCount > 1000){//TODO: Number to be lower?
+        Memory.tickCount = 0;
+    }
 
 
-    //Clear Memory
+
+    //TODO: Run less often? - Clears Memory
     for (var i in Memory.creeps) {
         if (!Game.creeps[i]) {
             delete Memory.creeps[i];
@@ -23,9 +33,13 @@ module.exports.loop = function () {
     }
 
 
-    //TODO: This was getting called when a creep was an enemies room cant figure out why yet
+//TODO: This was getting called when a creep was an enemies room cant figure out why yet
     //MAKE ALL TOWERS IN ALL ROOMS RUN
     for(var roomName in Game.rooms) {
+
+        //TODO: Tempory
+        roomPlanner.plan(roomName);
+
         var towers = Game.rooms[roomName].find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}});
         towerManager.run(towers,roomName);
     }
@@ -99,7 +113,9 @@ module.exports.loop = function () {
     //     Memory.wallStrength = 5000;
     // }
 
-
+    // if(Memory.tickCount == undefined){
+    //     Memory.tickCount = 0;
+    // }
 
 }
 

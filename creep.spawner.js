@@ -54,7 +54,7 @@ var creepSpawner = {
             creepSpawner.spawnCreep(undefined,'harvester',[WORK, WORK, CARRY, MOVE]);
         } else {
             //excess energy to spend - on scouts
-            // creepSpawner.spawnCreep(undefined,'scout',[MOVE,MOVE,ATTACK,MOVE,ATTACK,MOVE,ATTACK]);
+            // creepSpawner.spawnCreep(undefined,'scout',[MOVE,MOVE,ATTACK,MOVE,ATTACK,MOVE,ATTACK,MOVE,ATTACK,MOVE,ATTACK,MOVE,ATTACK]);
 
 
             // creepSpawner.spawnCreep(undefined,'scout',[MOVE]);//TODO: Energy runner - one shot tower energy waste
