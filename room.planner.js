@@ -51,16 +51,104 @@ module.exports = {
         for(var roomName in Game.rooms) {//Loop through all rooms your creeps/structures are in
             var room = Game.rooms[roomName];
             console.log(roomName);
+
+            //TODO: Accept an entry point - build a flag there (append room name for uniqueness): entryFlag
+
             // console.log(room.energyAvailable);//No usful ideas yet
             // console.log(room.energyCapacityAvailable);//no usful ideas yet
 
             // var loc = Game.rooms[roomName].find(STRUCTURE_POWER_SPAWN);
             // var loc = room.find(STRUCTURE_POWER_SPAWN);
 
+
+            // goal: function(poss,rangee) {
+            //     var goal;
+            //     goal.pos = poss;
+            //     goal.range = rangee;
+            //     return goal;
+            // }
+
             var sources = room.find(FIND_SOURCES);
             for (i = 0; i < sources.length; ++i) {
-                console.log(sources[i].pos);
+                let origin = Game.flags.Flag1.pos;
+                console.log(origin.x + " " + origin.y);
+
+                if (Game.flags.Flag1.room == sources[i].room) {
+                    var goal = {pos:sources[i].pos , range:1};//Create goal object for path search
+                    var path = PathFinder.search(origin, goal);
+
+
+                    console.log("Path: "+ path);
+
+                    // var keys = Object.keys(path);//TODO What the hell is in path?
+                    // console.log(keys.toString());
+
+                    //Actually the doco says:
+                    console.log(path.path.toString());//TODO HAHA SUCCESS THE PATH
+                    // path.path
+                    // path.ops
+                    // path.cost
+                    // path.incomplete //TODO: True/false if incomplete
+
+
+                }
+
+                console.log("Source location: " + sources[i].pos);
             }
+
+
+
+            //TODO: There are 4 flags:
+            //TODO: entryFlag
+            //TODO: energySouceOneFlag
+            //TODO: energySouceTwoFlag
+            //TODO: controllerFlag
+
+
+
+            //TODO: Only entryFlag is known
+            //TODO: Find energySpawn's
+            //TODO: Path from entryFlag to spawn(s)
+                //Thus create flags at spawn
+
+
+            //TODO: Use this http://docs.screeps.com/api/#PathFinder
+            //PathFinder.search(origin, goal, [opts])
+
+            //TODO: Later optimize using 'CostMatrix':
+                //TODO: http://docs.screeps.com/api/#PathFinder-CostMatrix
+
+
+            //entryFlag to energySource1Flag
+
+
+            // var flags = Game.flags;//Flags is a hash set
+            // Object.keys(flags).forEach(function (key) {
+            //     var flag = flags[key];
+            //     if(room == flag.room) {//Otherwise flags show for every room
+            //         console.log("FLAGS: x:" + flag.pos.x + " y:"+flag.pos.y );
+            //         roomPos = new RoomPosition(flag.pos.x ,flag.pos.y, roomName);
+            //         var success = roomPos.createConstructionSite(STRUCTURE_ROAD);
+            //         console.log(success);
+            //
+            //     }
+            // })
+
+            //TODO: Make flags
+            // createFlag(x, y, [name], [color], [secondaryColor])
+            // (pos, [name], [color], [secondaryColor])
+            // COLOR_* constants
+
+
+
+
+
+
+
+
+
+
+
 
             // sources.forEach(function(entry) {
             //     console.log(entry.pos);
