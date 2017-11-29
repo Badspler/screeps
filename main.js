@@ -33,7 +33,6 @@ module.exports.loop = function () {
     }
 
 
-//TODO: This was getting called when a creep was an enemies room cant figure out why yet
     //MAKE ALL TOWERS IN ALL ROOMS RUN
     for(var roomName in Game.rooms) {
 
@@ -41,11 +40,14 @@ module.exports.loop = function () {
         roomPlanner.plan(roomName);
 
         var towers = Game.rooms[roomName].find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}});
-        towerManager.run(towers,roomName);
+        if(towers.length > 0) {
+            towerManager.run(towers, roomName);
+        }
     }
 
 
-
+    //TODO: Make use of recycleCreep(target) so they kill themselves over containers.
+    //TODO: ALso look into renewCreep(target)
 
     //Counts of creep type
     var harvestCount = 0;

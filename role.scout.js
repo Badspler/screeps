@@ -72,26 +72,31 @@ module.exports = {
                 creep.moveTo(exit, {visualizePathStyle: {stroke: '#ff1a26'}});
             }
 
-        } else if (currentRoomString.localeCompare(roomN2.toString()) == 0) {
-            //E41N17
-            anotherRoomName = 'E41N18';
-            if (creep.room != anotherRoomName) {
-                const exitDir = Game.map.findExit(creep.room, anotherRoomName);
-                const exit = creep.pos.findClosestByPath(exitDir);
-                creep.moveTo(42,0, {visualizePathStyle: {stroke: '#ff1a26'}});
-            }
-
-
-        } else if (currentRoomString.localeCompare(roomN3stuck.toString()) == 0) {
-            //E41N17
-            anotherRoomName = 'E41N18';
-            if (creep.room != anotherRoomName) {
-                const exitDir = Game.map.findExit(creep.room, anotherRoomName);
-                const exit = creep.pos.findClosestByPath(exitDir);
-                creep.moveTo(37,21, {visualizePathStyle: {stroke: '#ff1a26'}});
-            }
-
         }
+        //TODO: Completly redo this to actually do something useful
+        // else if (currentRoomString.localeCompare(roomN2.toString()) == 0) {
+        //     //E41N17
+        //     anotherRoomName = 'E41N18';
+        //     if (creep.room != anotherRoomName) {
+        //         const exitDir = Game.map.findExit(creep.room, anotherRoomName);
+        //         const exit = creep.pos.findClosestByPath(exitDir);
+        //         creep.moveTo(42,0, {visualizePathStyle: {stroke: '#ff1a26'}});
+        //     }
+        //
+        //
+        // } else if (currentRoomString.localeCompare(roomN3stuck.toString()) == 0) {
+        //     //E41N17
+        //     anotherRoomName = 'E41N18';
+        //     if (creep.room != anotherRoomName) {
+        //         const exitDir = Game.map.findExit(creep.room, anotherRoomName);
+        //         const exit = creep.pos.findClosestByPath(exitDir);
+        //         creep.moveTo(37,21, {visualizePathStyle: {stroke: '#ff1a26'}});
+        //     }
+        //
+        // }
+
+
+
         // else if (currentRoomString.localeCompare(roomN3.toString()) == 0) {
         //     //E41N18
         //     anotherRoomName = 'E41N19';
