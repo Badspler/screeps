@@ -22,7 +22,14 @@ module.exports = {
         function defendRoom(tower,roomName) {
             var hostiles = Game.rooms[roomName].find(FIND_HOSTILE_CREEPS);
             if(hostiles.length > 0) {
-                var username = hostiles[0].owner.username;
+
+                //TODO IGNORE BUCKKITS
+                // var username = hostiles[0].owner.username;
+
+                if(username.valueOf("Buckets1667")){
+                    //Code to not hit my player friend - not enabled because not needed currently
+                    //return;
+                }
                 console.log("TOWER ATTACKING THREAT in " + tower.room + " FROM USER: " + username);
                 if (!username.valueOf("Invader")){
                     Game.notify(`User ${username} spotted in room ${roomName}`); //Send email alert if its not NPC
