@@ -1,4 +1,5 @@
 var roleHarvester = require('role.harvester');
+var roleMiner = require('role.miner');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
@@ -51,6 +52,7 @@ module.exports.loop = function () {
 
     //Counts of creep type
     var harvestCount = 0;
+    var minerCount = 0;
     var upgraderCount = 0;
     var builderCount = 0;
     var repairerCount = 0;
@@ -66,6 +68,10 @@ module.exports.loop = function () {
         if (creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
             harvestCount++;
+        }
+        else if (creep.memory.role == 'miner') {
+            roleMiner.run(creep);
+            minerCount++;
         }
         else if (creep.memory.role == 'upgrader') {
             roleUpgrader.run(creep);
@@ -99,13 +105,16 @@ module.exports.loop = function () {
         " Repairer: " + repairerCount +
         " Builders: " + builderCount +
         " Claimers: " + claimerCount +
-        " Scouts " + scoutCount;
+        " Scouts: " + scoutCount +
+        " Miners: " + minerCount;
 
     if (Memory.logString == undefined || Memory.logString.toString().localeCompare(logString.toString())) {
         Memory.logString = logString.toString();
         console.log(logString);
     }
-    creepSpawner.run(harvestCount,upgraderCount,repairerCount,builderCount,claimerCount,scoutCount);
+
+    //(harvestCount, upgraderCount, repairerCount, builderCount, claimerCount,scoutCount,minerCount)
+    creepSpawner.run(harvestCount,upgraderCount,repairerCount,builderCount,claimerCount,scoutCount,minerCount);
 
 
 

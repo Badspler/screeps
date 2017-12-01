@@ -7,8 +7,7 @@
  * mod.thing == 'a thing'; // true
  */
 var creepSpawner = {
-    run: function (harvestCount, upgraderCount, repairerCount, builderCount, claimerCount,scoutCount) {
-
+    run: function (harvestCount, upgraderCount, repairerCount, builderCount, claimerCount,scoutCount,minerCount) {
 
         var totalAliveCreeps = harvestCount + upgraderCount + repairerCount + builderCount;// + claimerCount +  scoutCount; //THESE TYPE NOTE COUNTED
 
@@ -17,22 +16,27 @@ var creepSpawner = {
         // WORK	    100
         // CARRY	50
         // ATTACK	80
-// RANGED_ATTACK	150
+        // RANGED_ATTACK	150
         // HEAL	    250
         // TOUGH	10
         // CLAIM	600
 
         var miniumTotalCreeps = 6;
 
-        var minimumHarvesters = 4;
-        var minimumUpgraders = 6;
-        var minimumRepairer = 3;
-        var minimumBuilders = 1;
+        var minimumHarvesters = 2;
+        var minimumMiners= 1;
+        var minimumUpgraders = 2;//6;//TODO SCALED DOWN WHILE WRITING HAWLER CODE
+        var minimumRepairer = 2;
+        var minimumBuilders = 2;
         var minimumClaimer = 2;
         var minimumCount = 5;
 
+
         if (harvestCount < minimumHarvesters) { //TODO: CHANGE AWAY FROM BUILDERS + HARVESTERS
             creepSpawner.spawnCreep(undefined,'harvester',[WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]);
+
+        } else if (minerCount < minimumMiners) {
+            creepSpawner.spawnCreep(undefined,'miner',[WORK, WORK, MOVE, WORK, WORK, MOVE, WORK, WORK, MOVE, CARRY]);
 
         } else if (upgraderCount < minimumUpgraders) {
             creepSpawner.spawnCreep(undefined,'upgrader',[WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]);
@@ -57,8 +61,6 @@ var creepSpawner = {
         } else {
             //excess energy to spend - on scouts
             // creepSpawner.spawnCreep(undefined,'scout',[MOVE,MOVE,ATTACK,MOVE,ATTACK,MOVE,ATTACK,MOVE,ATTACK,MOVE,ATTACK,MOVE,ATTACK]);
-
-
             // creepSpawner.spawnCreep(undefined,'scout',[MOVE]);//TODO: Energy runner - one shot tower energy waste
         }
 

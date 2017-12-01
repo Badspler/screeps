@@ -26,6 +26,8 @@ module.exports = {
 
 	    if(creep.memory.building) {
 
+            //TODO: Check that the constuction-site is mine - otherwise my dudes will build it....
+
 	    	var constructionSite = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
 	    	if(constructionSite != undefined){
 	    		if(creep.build(constructionSite) == ERR_NOT_IN_RANGE){
