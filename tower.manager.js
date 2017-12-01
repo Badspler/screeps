@@ -24,8 +24,9 @@ module.exports = {
             if(hostiles.length > 0) {
                 var username = hostiles[0].owner.username;
                 console.log("TOWER ATTACKING THREAT in " + tower.room + " FROM USER: " + username);
-                // Game.notify(`User ${username} spotted in room ${roomName}`); //Send email alert
-
+                if (!username.valueOf("Invader")){
+                    Game.notify(`User ${username} spotted in room ${roomName}`); //Send email alert if its not NPC
+                }
                 tower.forEach(tower => tower.attack(hostiles[0]));
                 return true;
             }else{

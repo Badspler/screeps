@@ -37,7 +37,7 @@ module.exports.loop = function () {
     for(var roomName in Game.rooms) {
 
         //TODO: Tempory
-        roomPlanner.plan(roomName);
+        roomPlanner.plan(roomName);//TODO TURN THIS ON/OFF TO RUN ROOM.PLANNER CODE
 
         var towers = Game.rooms[roomName].find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}});
         if(towers.length > 0) {

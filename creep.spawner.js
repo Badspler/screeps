@@ -26,9 +26,9 @@ var creepSpawner = {
 
         var minimumHarvesters = 4;
         var minimumUpgraders = 6;
-        var minimumRepairer = 1;
-        var minimumBuilders = 2;
-        var minimumClaimer = 1;
+        var minimumRepairer = 3;
+        var minimumBuilders = 1;
+        var minimumClaimer = 2;
         var minimumCount = 5;
 
         if (harvestCount < minimumHarvesters) { //TODO: CHANGE AWAY FROM BUILDERS + HARVESTERS
@@ -45,8 +45,9 @@ var creepSpawner = {
             creepSpawner.spawnCreep(undefined,'builder',[WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE]);
 
         } else if (claimerCount < minimumClaimer) {
-            creepSpawner.spawnCreep(undefined,'claimer',[MOVE,MOVE]);
-            // creepSpawner.spawnCreep(undefined,'claimer',[CLAIM,MOVE,MOVE]);//TODO actual
+            // creepSpawner.spawnCreep(undefined,'claimer',[MOVE,MOVE]);
+            creepSpawner.spawnCreep(undefined,'claimer',[MOVE,MOVE,CLAIM]);//TODO actual
+            //TODO: Claimer body part reduces lifespan by 500 ticks.
 
 
             //Something has gone wrong - backup just spawn using max 300 energy.
