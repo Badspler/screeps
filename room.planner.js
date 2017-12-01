@@ -68,33 +68,77 @@ module.exports = {
             //     return goal;
             // }
 
-            var sources = room.find(FIND_SOURCES);
-            for (i = 0; i < sources.length; ++i) {
-                let origin = Game.flags.Flag1.pos;
-                console.log(origin.x + " " + origin.y);
-
-                if (Game.flags.Flag1.room == sources[i].room) {
-                    var goal = {pos:sources[i].pos , range:1};//Create goal object for path search
-                    var path = PathFinder.search(origin, goal);
 
 
-                    console.log("Path: "+ path);
-
-                    // var keys = Object.keys(path);//TODO What the hell is in path?
-                    // console.log(keys.toString());
-
-                    //Actually the doco says:
-                    console.log(path.path.toString());//TODO HAHA SUCCESS THE PATH
-                    // path.path
-                    // path.ops
-                    // path.cost
-                    // path.incomplete //TODO: True/false if incomplete
 
 
+
+
+            // // TODO: Turn into function: WORKS - TURNED INTO BELOW
+            // var sources = room.find(FIND_SOURCES);
+            // for (i = 0; i < sources.length; ++i) {
+            //     let origin = Game.flags.Flag1.pos;
+            //     // console.log(origin.x + " " + origin.y);
+            //     // console.log(Game.flags.Flag1.room  + " " + sources[i].room);
+            //     if (Game.flags.Flag1.room == sources[i].room) {
+            //         var goal = {pos:sources[i].pos , range:1};//Create goal object for path search
+            //         var pathSet = PathFinder.search(origin, goal);
+            //
+            //         // var keys = Object.keys(path);//TODO What the hell is in path?
+            //         // console.log(keys.toString());
+            //         // Actually the doco says:
+            //
+            //         // const constuctionTotal = pathSet.path.length;//TODO : Number of constuction sites to manage
+            //         const pathComplete = pathSet.incomplete;//TODO: True/false if incomplete
+            //
+            //         for(j = 0; j < pathSet.path.length; j++){
+            //             roomPos = new RoomPosition(pathSet.path[j].x ,pathSet.path[j].y, roomName);
+            //             roomPos.createConstructionSite(STRUCTURE_ROAD);
+            //         }
+            //     }
+            // }
+            // // TODO: Turn into function
+
+            //TODO: Important note that flags have undefiend room unless there is a creep in them to give 'visability'
+
+            // TODO: THIS WORKS
+            // let origin = Game.flags.Flag1.pos;
+            // let goal = Game.flags.Flag2.pos;
+            // buildRoads(roomName,origin,goal);//TODO BUILD FROM ORIGIN TO
+
+            function buildRoads(roomName,origin,goal) {
+                //Example goal:
+                // var goal = {pos:sources[i].pos , range:1};//Create goal object for path search
+
+                //TODO: Make check for roomVisability - not sure how yet
+
+                if (origin.room === goal.room) {
+                    var pathObject = PathFinder.search(origin, goal);
+                    // const constuctionTotal = pathSet.path.length;//TODO : Number of constuction sites to manage
+                    if(pathObject.incomplete){
+                        return 2;//ERROR Couldn't make path
+                    }
+
+                    //Specificly add road to origin spot - not on the path //TODO Make better?
+                    roomPos = new RoomPosition(origin.x ,origin.y, roomName);
+                    success = roomPos.createConstructionSite(STRUCTURE_ROAD);//TODO use success to determine error occurred
+
+                    for(i = 0; i < pathObject.path.length; i++){
+                        roomPos = new RoomPosition(pathObject.path[i].x ,pathObject.path[i].y, roomName);
+                        success = roomPos.createConstructionSite(STRUCTURE_ROAD);//TODO use success to determine error occurred
+                    }
+
+                    return 0;//Success!
+                }else {
+                    return 1;//ERROR Origin and Goal not in same room
                 }
-
-                console.log("Source location: " + sources[i].pos);
             }
+
+
+
+
+
+
 
 
 
@@ -142,14 +186,6 @@ module.exports = {
 
 
 
-
-
-
-
-
-
-
-
             // sources.forEach(function(entry) {
             //     console.log(entry.pos);
             // });
@@ -172,9 +208,6 @@ module.exports = {
 
 
         //lookAt(x, y) //(target)
-
-
-
 
 
 
