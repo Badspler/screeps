@@ -69,9 +69,10 @@ module.exports = {
                 // roleBuilder.run(creep);
 
 
-                creep.memory.jobOverride = 'upgrader';
-                roleUpgrader.run(creep);
-                creep.memory.travel = 'deliver';
+                //TODO: DO nothing - not ideal but this role shal be phased out
+                // creep.memory.jobOverride = 'upgrader';
+                // roleUpgrader.run(creep);
+                // creep.memory.travel = 'deliver';
             }
         }
 

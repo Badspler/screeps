@@ -7,7 +7,7 @@
  * mod.thing == 'a thing'; // true
  */
 var creepSpawner = {
-    run: function (harvestCount, upgraderCount, repairerCount, builderCount, claimerCount,scoutCount,minerCount) {
+    run: function (harvestCount, upgraderCount, repairerCount, builderCount, claimerCount,scoutCount,minerCount,haulerCount) {
 
         var totalAliveCreeps = harvestCount + upgraderCount + repairerCount + builderCount;// + claimerCount +  scoutCount; //THESE TYPE NOTE COUNTED
 
@@ -24,11 +24,12 @@ var creepSpawner = {
         var miniumTotalCreeps = 6;
 
         var minimumHarvesters = 2;
+        var minimumHaulers = 2;
         var minimumMiners= 1;
         var minimumUpgraders = 2;//6;//TODO SCALED DOWN WHILE WRITING HAWLER CODE
         var minimumRepairer = 2;
-        var minimumBuilders = 2;
-        var minimumClaimer = 2;
+        var minimumBuilders = 1;
+        var minimumClaimer = 1;
         var minimumCount = 5;
 
 
@@ -36,8 +37,11 @@ var creepSpawner = {
             creepSpawner.spawnCreep(undefined,'harvester',[WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]);
 
         } else if (minerCount < minimumMiners) {
-            creepSpawner.spawnCreep(undefined,'miner',[WORK, WORK, MOVE, WORK, WORK, MOVE, WORK, WORK, MOVE, CARRY]);
-
+            //TODO: Worker = 2 units. CARRY % WORK = 0. Needs nice divisable otherwise wasted ticks.
+            creepSpawner.spawnCreep(undefined,'miner',[WORK, WORK, MOVE, WORK, WORK, MOVE, WORK, CARRY, MOVE, CARRY]);
+        } else if (haulerCount < minimumHaulers) {
+            // creepSpawner.spawnCreep(undefined,'hauler',[CARRY,CARRY,MOVE,CARRY,CARRY,MOVE,CARRY,CARRY,MOVE,CARRY,CARRY,MOVE,CARRY,CARRY,MOVE,CARRY,CARRY,MOVE,CARRY,CARRY,MOVE,CARRY,CARRY,MOVE]);
+            creepSpawner.spawnCreep(undefined,'hauler',[CARRY,CARRY,MOVE,CARRY,CARRY,MOVE,CARRY,CARRY,MOVE,CARRY,CARRY,MOVE]);
         } else if (upgraderCount < minimumUpgraders) {
             creepSpawner.spawnCreep(undefined,'upgrader',[WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]);
 

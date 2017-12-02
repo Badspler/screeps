@@ -1,5 +1,6 @@
 var roleHarvester = require('role.harvester');
 var roleMiner = require('role.miner');
+var roleHauler = require('role.hauler');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
@@ -23,6 +24,10 @@ module.exports.loop = function () {
     if(tickCount > 1000){//TODO: Number to be lower?
         Memory.tickCount = 0;
     }
+
+
+    //TODO: USE FOR DEBUGGING CPU
+    // console.log("CPU INFO |  Limit: " + Game.cpu.limit + " tickLimit: " + Game.cpu.tickLimit + " bucket: " + Game.cpu.bucket + " USED: <font color=\"red\">" + Game.cpu.getUsed() + "</font>");
 
 
 
@@ -53,6 +58,7 @@ module.exports.loop = function () {
     //Counts of creep type
     var harvestCount = 0;
     var minerCount = 0;
+    var haulerCount = 0;
     var upgraderCount = 0;
     var builderCount = 0;
     var repairerCount = 0;
@@ -72,6 +78,10 @@ module.exports.loop = function () {
         else if (creep.memory.role == 'miner') {
             roleMiner.run(creep);
             minerCount++;
+        }
+        else if (creep.memory.role == 'hauler') {
+            roleHauler.run(creep);
+            haulerCount++;
         }
         else if (creep.memory.role == 'upgrader') {
             roleUpgrader.run(creep);
@@ -106,7 +116,8 @@ module.exports.loop = function () {
         " Builders: " + builderCount +
         " Claimers: " + claimerCount +
         " Scouts: " + scoutCount +
-        " Miners: " + minerCount;
+        " Miners: " + minerCount +
+        " Haulers: " + haulerCount;
 
     if (Memory.logString == undefined || Memory.logString.toString().localeCompare(logString.toString())) {
         Memory.logString = logString.toString();
@@ -114,7 +125,7 @@ module.exports.loop = function () {
     }
 
     //(harvestCount, upgraderCount, repairerCount, builderCount, claimerCount,scoutCount,minerCount)
-    creepSpawner.run(harvestCount,upgraderCount,repairerCount,builderCount,claimerCount,scoutCount,minerCount);
+    creepSpawner.run(harvestCount,upgraderCount,repairerCount,builderCount,claimerCount,scoutCount,minerCount,haulerCount);
 
 
 

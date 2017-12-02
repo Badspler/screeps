@@ -2,13 +2,15 @@ module.exports = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-
+        if(creep.spawning){
+            return;//The creep isn't ready yet
+        }
 
         //DEBUG INFO:
         // console.log("travel: " + creep.memory.target + " | Energy: " + creep.carry.energy + " |");
 
         var sources = creep.room.find(FIND_SOURCES);//TODO: Be set (Currently array - needs to be source[0])
-        var source = sources[1];//TODO: Be set (Currently array - needs to be source[0])
+        var source = sources[0];//TODO: Be set (Currently array - needs to be source[0])
 
         if(source === undefined){
             //TODO set this if not set
@@ -38,15 +40,18 @@ module.exports = {
 
             if(!(container === null)){
                 //Move to the container and transfer everything in
-                if (creep.transfer(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+
+                let success = creep.transfer(container, RESOURCE_ENERGY);
+                if (success == ERR_NOT_IN_RANGE) {
                     creep.moveTo(container);
+                } else if(ERR_FULL){
+                    //TODO: Check if container is full and maybe drop on ground for extra storage.
+                    // creep.drop(RESOURCE_ENERGY);
                 }
-
-                //TODO: Check if container is full and maybe drop on ground for extra storage.
-
             }else{
                 //TODO No actual containers in room
                 //TODO Build one?
+                creep.drop(RESOURCE_ENERGY);//Just drop the energy otherwise
                 console.log("Error " + creep.name + " miner does not have a container to find.");//Just print to raise issue now
             }
         }
