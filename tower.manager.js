@@ -24,7 +24,7 @@ module.exports = {
             if(hostiles.length > 0) {
 
                 //TODO IGNORE BUCKKITS
-                // var username = hostiles[0].owner.username;
+                var username = hostiles[0].owner.username;
 
                 if(username.valueOf("Buckets1667")){
                     //Code to not hit my player friend - not enabled because not needed currently
