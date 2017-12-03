@@ -79,16 +79,8 @@ module.exports = {
         //     if (creep.room != anotherRoomName) {
         //         const exitDir = Game.map.findExit(creep.room, anotherRoomName);
         //         const exit = creep.pos.findClosestByPath(exitDir);
-        //         creep.moveTo(42,0, {visualizePathStyle: {stroke: '#ff1a26'}});
+        //         creep.moveTo(42, 0, {visualizePathStyle: {stroke: '#ff1a26'}});
         //     }
-
-
-
-
-
-
-
-
         // } else if (currentRoomString.localeCompare(roomN3stuck.toString()) == 0) {
         //     //E41N17
         //     anotherRoomName = 'E41N18';
@@ -97,7 +89,6 @@ module.exports = {
         //         const exit = creep.pos.findClosestByPath(exitDir);
         //         creep.moveTo(37,21, {visualizePathStyle: {stroke: '#ff1a26'}});
         //     }
-        //
         // }
 
 

@@ -45,12 +45,12 @@ module.exports = {
 
 
 
-        console.log("-----------------");
+        // console.log("-----------------");
 
         // defendRoom(tower,roomName);
         for(var roomName in Game.rooms) {//Loop through all rooms your creeps/structures are in
             var room = Game.rooms[roomName];
-            console.log(roomName);
+            // console.log(roomName);
 
             //TODO: Accept an entry point - build a flag there (append room name for uniqueness): entryFlag
 

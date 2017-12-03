@@ -24,7 +24,7 @@ var creepSpawner = {
         var miniumTotalCreeps = 6;
 
         var minimumHarvesters = 2;
-        var minimumHaulers = 2;
+        var minimumHaulers = 1;
         var minimumMiners= 1;
         var minimumUpgraders = 2;//6;//TODO SCALED DOWN WHILE WRITING HAWLER CODE
         var minimumRepairer = 2;
@@ -41,7 +41,7 @@ var creepSpawner = {
             creepSpawner.spawnCreep(undefined,'miner',[WORK, WORK, MOVE, WORK, WORK, MOVE, WORK, CARRY, MOVE, CARRY]);
         } else if (haulerCount < minimumHaulers) {
             // creepSpawner.spawnCreep(undefined,'hauler',[CARRY,CARRY,MOVE,CARRY,CARRY,MOVE,CARRY,CARRY,MOVE,CARRY,CARRY,MOVE,CARRY,CARRY,MOVE,CARRY,CARRY,MOVE,CARRY,CARRY,MOVE,CARRY,CARRY,MOVE]);
-            creepSpawner.spawnCreep(undefined,'hauler',[CARRY,CARRY,MOVE,CARRY,CARRY,MOVE,CARRY,CARRY,MOVE,CARRY,CARRY,MOVE]);
+            creepSpawner.spawnCreep(undefined,'hauler',[CARRY,CARRY,MOVE,CARRY,CARRY,MOVE,CARRY,CARRY,MOVE,CARRY,CARRY,MOVE,CARRY,CARRY,MOVE]);
         } else if (upgraderCount < minimumUpgraders) {
             creepSpawner.spawnCreep(undefined,'upgrader',[WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]);
 
@@ -74,7 +74,6 @@ var creepSpawner = {
         if (name == undefined) {
             name = type + Game.time;
         }
-
         //Attempt to spawn the new creep
         var name = Game.spawns.Spawn1.createCreep(bodyparts, name, {role: type})
 
