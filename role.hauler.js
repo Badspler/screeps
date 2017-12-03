@@ -32,6 +32,9 @@ module.exports = {
                 creep.moveTo(target, {visualizePathStyle: {stroke: '#ff900d'}});
             } else if(success === OK){
                 creep.memory.targetId = undefined;
+            } else if(success === ERR_NOT_ENOUGH_RESOURCES){
+                //ERR - We were beat to the resource - better reset.
+                creep.memory.targetId = undefined;
             }
         }
 
@@ -77,8 +80,8 @@ module.exports = {
             let biggestEnergy = -1;
             let bestTarget = containerTargets[0];
             for(i=0;i<containerTargets.length;i++){
-                if(containerTargets[i].capacity > biggestEnergy){
-                    biggestEnergy = containerTargets[i].capacity;
+                if(containerTargets[i].store.energy > biggestEnergy){
+                    biggestEnergy = containerTargets[i].store.energy;//TODO ERROR HERE
                     bestTarget = containerTargets[i];
                 }
             }
