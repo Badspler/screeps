@@ -1,7 +1,7 @@
 
 var creepsManager = require('manager.creeps');
 var towerManager = require('manager.tower');
-var roomManager = require('manager.tower');
+var roomManager = require('manager.room');
 
 module.exports.loop = function () {
 

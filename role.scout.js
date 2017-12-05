@@ -51,27 +51,33 @@ module.exports = {
         //     return;
         // }
 
+        if (hostileCreeps.length > 0) {
+            creep.moveTo(hostileCreeps[0], {visualizePathStyle: {stroke: '#ff1a26'}});
+            creep.attack(hostileCreeps[0]);
+            return;
+        }
+
 
 
         //////////////////////// GO SOMEWHERE//////////////////////////////////
 
-        var roomN2 = "[room E41N17]";
-        var roomN3 = "[room E41N18]";
-        var roomN3stuck = "[room E42N18]";
-        var enemyRoom = "[room E41N19]";
-
-        var anotherRoomName = 'E41N17';
-        if (currentRoomString.localeCompare(baseRoom.toString()) == 0) {
-            //E41N16
-            //This is the neighbouring room i want to control
-            anotherRoomName = 'E41N17';
-            if (creep.room != anotherRoomName) {
-                const exitDir = 1;
-                const exit = creep.pos.findClosestByPath(exitDir);
-                creep.moveTo(exit, {visualizePathStyle: {stroke: '#ff1a26'}});
-            }
-
-        }
+        // var roomN2 = "[room E41N17]";
+        // var roomN3 = "[room E41N18]";
+        // var roomN3stuck = "[room E42N18]";
+        // var enemyRoom = "[room E41N19]";
+        //
+        // var anotherRoomName = 'E41N17';
+        // if (currentRoomString.localeCompare(baseRoom.toString()) == 0) {
+        //     //E41N16
+        //     //This is the neighbouring room i want to control
+        //     anotherRoomName = 'E41N17';
+        //     if (creep.room != anotherRoomName) {
+        //         const exitDir = 1;
+        //         const exit = creep.pos.findClosestByPath(exitDir);
+        //         creep.moveTo(exit, {visualizePathStyle: {stroke: '#ff1a26'}});
+        //     }
+        //
+        // }
         // //TODO: Completly redo this to actually do something useful
         // else if (currentRoomString.localeCompare(roomN2.toString()) == 0) {
         //     //E41N17

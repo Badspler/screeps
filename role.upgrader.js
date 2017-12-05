@@ -3,6 +3,13 @@ var roleUpgrader = {
     /** @param {Creep} creep **/
     run: function(creep) {
 
+
+
+
+
+
+
+
         //DEBUG INFO:
         // console.log("travel: " + creep.memory.travel + " | Energy: " + creep.carry.energy + " |");
 
@@ -26,6 +33,25 @@ var roleUpgrader = {
 
         //Deliver energy to controller
         }else if(creep.memory.travel = 'deliver') {
+
+            /***
+             * TOWERS MUST BE GIVEN ENERGY
+             */
+            var towers = creep.room.find(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return ((structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity);
+                }
+            });
+
+            if(towers.length > 0) {
+                if (creep.transfer(towers[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(towers[0], {visualizePathStyle: {stroke: '#ff22bb'}});
+                    return
+                }
+            }
+
+
+
             if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(creep.room.controller,{visualizePathStyle: {stroke: '#ff8888'}});
             }

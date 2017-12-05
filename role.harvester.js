@@ -20,8 +20,10 @@ module.exports = {
             if(creep.carry.energy == 0){
                 creep.memory.jobOverride = 'false';
                 creep.memory.action = 'mineing';
+                return;
             }
-            roleBuilder.run(creep);
+            // roleBuilder.run(creep);
+            roleUpgrader.run(creep);
             return;
         }
 
@@ -70,9 +72,9 @@ module.exports = {
 
 
                 //TODO: DO nothing - not ideal but this role shal be phased out
-                // creep.memory.jobOverride = 'upgrader';
-                // roleUpgrader.run(creep);
-                // creep.memory.travel = 'deliver';
+                creep.memory.jobOverride = 'upgrader';
+                creep.memory.travel = 'deliver';
+                roleUpgrader.run(creep);
             }
         }
 

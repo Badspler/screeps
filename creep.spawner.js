@@ -21,15 +21,17 @@ var creepSpawner = {
         // TOUGH	10
         // CLAIM	600
 
+        //TODO: Current max is 30*50 + 300 = 1800
+
         var miniumTotalCreeps = 6;
 
-        var minimumHarvesters = 2;
-        var minimumHaulers = 1;
-        var minimumMiners= 1;
-        var minimumUpgraders = 2;//6;//TODO SCALED DOWN WHILE WRITING HAWLER CODE
+        var minimumHarvesters = 4;
+        var minimumHaulers = 0;//TODO
+        var minimumMiners= 0;//TODO
+        var minimumUpgraders = 6;
         var minimumRepairer = 2;
         var minimumBuilders = 1;
-        var minimumClaimer = 1;
+        var minimumClaimer = 0;
         var minimumCount = 5;
 
 
@@ -54,8 +56,8 @@ var creepSpawner = {
 
         } else if (claimerCount < minimumClaimer) {
             // creepSpawner.spawnCreep(undefined,'claimer',[MOVE,MOVE]);
-            creepSpawner.spawnCreep(undefined,'claimer',[MOVE,MOVE,CLAIM]);//TODO actual
-            //TODO: Claimer body part reduces lifespan by 500 ticks.
+            creepSpawner.spawnCreep(undefined,'claimer',[MOVE,MOVE,CLAIM,CLAIM]);//TODO actual
+            //TODO:NB: Claimer body part reduces lifespan by 500 ticks.
 
 
             //Something has gone wrong - backup just spawn using max 300 energy.
@@ -65,6 +67,9 @@ var creepSpawner = {
         } else {
             //excess energy to spend - on scouts
             // creepSpawner.spawnCreep(undefined,'scout',[MOVE,MOVE,ATTACK,MOVE,ATTACK,MOVE,ATTACK,MOVE,ATTACK,MOVE,ATTACK,MOVE,ATTACK]);
+            // creepSpawner.spawnCreep(undefined,'scout',[ATTACK,ATTACK,MOVE,ATTACK,ATTACK,MOVE,ATTACK,ATTACK,MOVE,ATTACK,ATTACK,
+            //     MOVE,ATTACK,ATTACK,MOVE,ATTACK,ATTACK,MOVE,ATTACK,ATTACK,MOVE,ATTACK,ATTACK,MOVE,ATTACK,ATTACK,MOVE]);
+
             // creepSpawner.spawnCreep(undefined,'scout',[MOVE]);//TODO: Energy runner - one shot tower energy waste
         }
 
